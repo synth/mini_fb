@@ -391,7 +391,11 @@ module MiniFB
         options.delete(:type)
         params = {}
         options.each do |key,value|
-          params[key] = "#{value}"
+          if value.kind_of?(File)
+	    params[key] = value
+	  else
+            params[key] = "#{value}"
+	  end
         end  
         params["access_token"] = "#{(access_token)}"
         params["metadata"] = "1" if options[:metadata]
